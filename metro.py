@@ -51,7 +51,8 @@ def sendBytes(byteStr, serObj):
     }
 
     #checksum check
-    print "Checksum check: " + str(countCheckSum(message[0],message[1],message[2]))
+    check = countCheckSum(message[0],message[1],message[2])
+    assert check == data['checksum']
 
     return data
 
