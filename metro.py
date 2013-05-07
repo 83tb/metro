@@ -72,6 +72,7 @@ def countCheckSum(byte1,byte2,byte3):
     Counts checksum from 3 bytes, returns 4th byte
     """
     listOfBytes = [byte1,byte2,byte3]
-    print listOfBytes
+    for l in listOfBytes:
+        print ByteToHex(l)
     checksum = sum(map(ord, listOfBytes))
     return checksum
