@@ -87,6 +87,6 @@ def countCheckSum(byte1,byte2,byte3):
     checksum = sum(map(ord, listOfBytes))
 
     chksm = hex(checksum)
-    if chksm[0] == '1': chksm[0] = 2
+    if chksm[2] == '1': chksm[2] = 2
 
     return chksm
