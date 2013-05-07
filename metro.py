@@ -52,7 +52,7 @@ def sendBytes(byteStr, serObj):
 
     #checksum check
     check = countCheckSum(message[0],message[1],message[2])
-    assert check == hex(data['checksum'])
+    assert str(check[2:3]) == data['checksum']
 
     return data
 
