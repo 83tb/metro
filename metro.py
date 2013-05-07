@@ -70,8 +70,8 @@ def getCommandAndAddress(byte1,byte2):
 
 def sliceByte(byte1):
     bits8 = Bits(bytes=byte1)
-    first,second = bits8.unpack('bytes:4,bytes:4')
-    return second
+    first,second = bits8.unpack('hex:1,hex:1')
+    return HexToByte(second)
 
 
 def countCheckSum(byte1,byte2,byte3):
