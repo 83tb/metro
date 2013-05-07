@@ -80,16 +80,8 @@ def countCheckSum(byte1,byte2,byte3):
     """
     Counts checksum from 3 bytes, returns 4th byte
     """
-    listOfBytes = [sliceByte(byte1),sliceByte(byte2),sliceByte(byte3)]
+    listOfBytes = [byte1,byte2,byte3]
 
     checksum = sum(map(ord, listOfBytes))
 
-    chksm = hex(checksum)
-    output = ""
-    if chksm[2] == '1':
-        ch = str(2)
-        output = chksm[0]+chksm[1]+ch+chksm[3]
-    else:
-        output = chksm
-
-    return output
+    return hex(checksum)
