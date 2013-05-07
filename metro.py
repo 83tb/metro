@@ -70,7 +70,7 @@ def getCommandAndAddress(byte1,byte2):
 
 def sliceByte(byte1):
     bits8 = Bits(bytes=byte1)
-    first,second = bits8.unpack('hex:1,hex:1')
+    first,second = bits8.unpack('hex:4,hex:4')
     return HexToByte(second)
 
 
