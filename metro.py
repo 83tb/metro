@@ -74,6 +74,8 @@ def sliceByte(byte1):
     return HexToByte(second)
 
 
+
+# wrong
 def countCheckSum(byte1,byte2,byte3):
     """
     Counts checksum from 3 bytes, returns 4th byte
