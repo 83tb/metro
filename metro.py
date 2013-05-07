@@ -48,6 +48,18 @@ def sendBytes(byteStr, serObj):
 
     }
 
+    print getCommandAndAddress(message[0],message[1])
+
     return data
 
-
+def getCommandAndAddress(byte1,byte2):
+    """
+    Gets Two First Bytes, and returns a dictionary with:
+    Command
+    SetGroup
+    Address
+    """
+    from bitstring import Bits
+    bits16 = Bits(bytes=byte1+byte2)
+    command,setGroup,address = bits16.unpack('uint:5,uint:1,uint:10')
+    return dict(command=command,setGroup=setGroup,address=address)
