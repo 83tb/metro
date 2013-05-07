@@ -68,14 +68,6 @@ def getCommandAndAddress(byte1,byte2):
     command,setGroup,address = bits16.unpack('uint:5,uint:1,uint:10')
     return dict(command=command,setGroup=setGroup,address=address)
 
-def sliceByte(byte1):
-    bits8 = Bits(bytes=byte1)
-    first,second = bits8.unpack('hex:4,hex:4')
-    return HexToByte(second)
-
-
-
-# wrong
 def countCheckSum(byte1,byte2,byte3):
     """
     Counts checksum from 3 bytes, returns 4th byte
@@ -83,5 +75,6 @@ def countCheckSum(byte1,byte2,byte3):
     listOfBytes = [byte1,byte2,byte3]
 
     checksum = sum(map(ord, listOfBytes))
+    if checksum>128: checksum = checksum - 128
 
     return hex(checksum)
