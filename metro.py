@@ -55,6 +55,7 @@ def sendBytes(byteStr, serObj):
 
     return data
 
+from bitstring import Bits
 def getCommandAndAddress(byte1,byte2):
     """
     Gets Two First Bytes, and returns a dictionary with:
@@ -62,17 +63,26 @@ def getCommandAndAddress(byte1,byte2):
     SetGroup
     Address
     """
-    from bitstring import Bits
+
     bits16 = Bits(bytes=byte1+byte2)
     command,setGroup,address = bits16.unpack('uint:5,uint:1,uint:10')
     return dict(command=command,setGroup=setGroup,address=address)
+
+def sliceByte(byte1):
+    bits8 = Bits(bytes=byte1)
+    first,second = bits8.unpack('uint:4,uint:4')
+    return second
+
 
 def countCheckSum(byte1,byte2,byte3):
     """
     Counts checksum from 3 bytes, returns 4th byte
     """
-    listOfBytes = [byte1,byte2,byte3]
+    listOfBytes = [sliceByte(byte1),sliceByte(byte2),sliceByte(byte3)]
+
     for l in listOfBytes:
         print ByteToHex(l)
+
+
     checksum = sum(map(ord, listOfBytes))
     return checksum
