@@ -30,11 +30,19 @@ def sendHex(hexstr,serObj):
     """
     return sendBytes(HexToByte(hexstr),serObj)
 
+def validate(byteStr):
+    bits32 = Bits(bytes=byteStr)
+    first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
+    check = countCheckSum(first,second,third)
+    assert str(check) == "0x"+str(ByteToHex(fourth))
+
 def sendBytes(byteStr, serObj):
     """
     Sends string like this: string "\xFF\xFE\x00\x01"
     Returns data dictionary
     """
+    validate(byteStr)
+
     serObj.write(byteStr)
     byte = serObj.read()
     if byte:
@@ -52,9 +60,8 @@ def sendBytes(byteStr, serObj):
 
     #checksum check
     check = countCheckSum(message[0],message[1],message[2])
+    # return only valid data
     assert str(check) == "0x"+str(data['checksum'])
-    print check
-    print data['checksum']
 
     return data
 
