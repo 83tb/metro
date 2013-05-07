@@ -1,10 +1,3 @@
-from bitstring import BitStream, Bits
-packet_data = '13ff091b'
-
-#zapalanie
-#sciemnianie
-#odczyt statusow
-
 import serial
 serObj = serial.Serial('/dev/ttyUSB1',
                        baudrate=4800,
@@ -29,11 +22,20 @@ def readbytes(number,serObj):
 
 # binarnego anda z maska 1111111, FFFFFFF
 
-hexstr = '10 09 09 22'
 
+def sendHex(hexstr,serObj):
+    """
+    Sends string like "FF FE 00 01"
+    Returns data dictionary
+    """
+    return sendBytes(HexToByte(hexstr),serObj)
 
-def send(hexstr, serObj):
-    serObj.write(HexToByte(hexstr))
+def sendBytes(byteStr, serObj):
+    """
+    Sends string like this: string "\xFF\xFE\x00\x01"
+    Returns data dictionary
+    """
+    serObj.write(byteStr)
     byte = serObj.read()
     if byte:
         message = byte + readbytes(4,serObj)
@@ -48,4 +50,4 @@ def send(hexstr, serObj):
 
     return data
 
-print send(hexstr, serObj)
+
