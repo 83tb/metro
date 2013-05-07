@@ -89,7 +89,7 @@ def countCheckSum(byte1,byte2,byte3):
     chksm = hex(checksum)
     output = ""
     if chksm[2] == '1':
-        ch = 2
+        ch = str(2)
         output = chksm[0]+chksm[1]+ch+chksm[3]
     else:
         output = chksm
