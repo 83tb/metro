@@ -73,4 +73,4 @@ def countCheckSum(byte1,byte2,byte3):
     """
     listOfBytes = [byte1,byte2,byte3]
     checksum = sum(map(ord, listOfBytes))
-    return ByteToHex(checksum & 0xFF)
+    return checksum & 0xFF
