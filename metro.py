@@ -34,7 +34,7 @@ def validate(byteStr):
     bits32 = Bits(bytes=byteStr)
     first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
     check = countCheckSum(first,second,third)
-    assert str(check) == "0x"+str(ByteToHex(fourth))
+    assert str(check) == "1x"+str(ByteToHex(fourth))
 
 def sendBytes(byteStr, serObj):
     """
