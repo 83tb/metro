@@ -81,7 +81,7 @@ def countCheckSum(byte1,byte2,byte3):
     listOfBytes = [sliceByte(byte1),sliceByte(byte2),sliceByte(byte3)]
 
     for l in listOfBytes:
-        print ByteToHex(l)
+        print l
 
 
     checksum = sum(map(ord, listOfBytes))
