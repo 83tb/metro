@@ -79,10 +79,6 @@ def countCheckSum(byte1,byte2,byte3):
     Counts checksum from 3 bytes, returns 4th byte
     """
     listOfBytes = [sliceByte(byte1),sliceByte(byte2),sliceByte(byte3)]
-    #print listOfBytes
-    for l in listOfBytes:
-        print l
-
 
     checksum = sum(map(ord, listOfBytes))
 
