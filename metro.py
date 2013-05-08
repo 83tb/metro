@@ -114,5 +114,5 @@ def constructRequest(command, address, parameter):
     bits = pack('uint:5, uint:1, uint:10, uint:8, bytes:1', command_number, 0, address, parameter, check)
 
 
-    return bits
+    return bits.bytes
 
