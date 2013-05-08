@@ -18,7 +18,7 @@ hexstr = '10 09 09 22'
 
 print "Constr"
 #print ByteToHex(hexstr2)
-print "#"
+print hexstr
 
 print sendHex(hexstr, serObj)
 
