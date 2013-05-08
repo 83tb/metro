@@ -1,5 +1,5 @@
 import serial
-from metro import sendHex, constructRequest, sendBytes
+from metro import sendHex, constructRequest, sendBytes,HexToByte
 from hexbyte import ByteToHex
 serObj = serial.Serial('/dev/ttyUSB1',
                        baudrate=4800,
@@ -23,3 +23,10 @@ print hexstr
 print sendHex(hexstr, serObj)
 
 #print sendBytes(hexstr2,serObj)
+
+
+from bitstring import Bits
+testBits = HexToByte(hexstr)
+first,second,third,fourth = testBits.unpack('uint:5, uint:1, uint:10, uint:8, uint:8')
+
+print first,second,third,fourth

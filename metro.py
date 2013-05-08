@@ -69,17 +69,6 @@ def sendBytes(byteStr, serObj):
     return data
 
 from bitstring import Bits
-def getCommandAndAddress(byte1,byte2):
-    """
-    Gets Two First Bytes, and returns a dictionary with:
-    Command
-    SetGroup
-    Address
-    """
-
-    bits16 = Bits(bytes=byte1+byte2)
-    command,setGroup,address = bits16.unpack('uint:5,uint:1,uint:10')
-    return dict(command=command,setGroup=setGroup,address=address)
 
 def getStatusByte(byte1):
     """
@@ -107,19 +96,6 @@ def countCheckSum(byte1,byte2,byte3):
     return hex(checksum)
 
 
-def countCheckSumByte(byte1,byte2,byte3):
-    """
-    Counts checksum from 3 bytes, returns 4th byte
-    """
-    listOfBytes = [byte1,byte2,byte3]
-
-    checksum = sum(map(ord, listOfBytes))
-    if checksum>128: checksum = checksum - 128
-
-    return HexToByte(hex(checksum)[2:3])
-
-
-
 
 
 from libmadli import getCommandNumber
@@ -129,7 +105,7 @@ def constructRequest(command, address, parameter):
     command_number = getCommandNumber(command)
     bits32 = pack('uint:5, uint:1, uint:10, uint:8, uint:8', command_number, 0, address, parameter, 0)
     first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
-    check = countCheckSumByte(first,second,third)
+    check = countCheckSum(first,second,third)
     bits = pack('uint:5, uint:1, uint:10, uint:8, bytes:1', command_number, 0, address, parameter, check)
 
 
