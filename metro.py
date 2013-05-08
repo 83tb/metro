@@ -97,7 +97,7 @@ def countCheckSumByte(byte1,byte2,byte3):
     checksum = sum(map(ord, listOfBytes))
     if checksum>128: checksum = checksum - 128
 
-    return chr(checksum)
+    return HexToByte(hex(checksum)[2:3])
 
 
 
