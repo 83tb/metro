@@ -96,7 +96,7 @@ def constructRequest(command, address, parameter):
     bits32 = pack('uint:5, uint:1, uint:10, uint:8, uint:8', command_number, 0, address, parameter, 0)
     first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
     check = countCheckSum(first,second,third)
-    bits32 = pack('uint:5, uint:1, uint:10, uint:8, bytes:1', command, 0, address, parameter, check)
+    bits32 = pack('uint:5, uint:1, uint:10, uint:8, bytes:1', command_number, 0, address, parameter, check)
 
 
     return bits32
