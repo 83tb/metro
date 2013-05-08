@@ -42,7 +42,7 @@ def sendBytes(byteStr, serObj):
     #validate(byteStr)
 
     serObj.write(byteStr)
-    response1 = ByteToHex(readbytes(4))
+    response1 = ByteToHex(readbytes(4,serObj))
 
     byte = serObj.read()
 
