@@ -93,7 +93,7 @@ def getStatusByte(byte1):
     """
 
     bits8 = Bits(bytes=byte1)
-    status1,status2 = bits16.unpack('uint:4,uint:4')
+    status1,status2 = bits8.unpack('uint:4,uint:4')
     return dict(status1=status1,status2=status2)
 
 
