@@ -50,17 +50,18 @@ def sendBytes(byteStr, serObj):
         message = byte + readbytes(4,serObj)
 
     # Interpret
-    baseDict = getCommandAndAddress(message[0],message[1])
+    baseDict = getStatusByte(message[0])
 
     data = {
-            'command': baseDict['command'],
-            'address': baseDict['address'],
 
-            #'command': ByteToHex(message[0]),
-            #'address': ByteToHex(message[1]),
+            """
+            4bit + 4bit
+            """
 
-            'parameter': ByteToHex(message[2]),
-            'checksum': ByteToHex(message[3]),
+            'command': baseDict['status1'],
+            'address': baseDict['status2'],
+
+
     }
 
     #checksum check
@@ -82,6 +83,20 @@ def getCommandAndAddress(byte1,byte2):
     bits16 = Bits(bytes=byte1+byte2)
     command,setGroup,address = bits16.unpack('uint:5,uint:1,uint:10')
     return dict(command=command,setGroup=setGroup,address=address)
+
+def getStatusByte(byte1):
+    """
+    Gets Two First Bytes, and returns a dictionary with:
+    Command
+    SetGroup
+    Address
+    """
+
+    bits8 = Bits(bytes=byte1)
+    status1,status2 = bits16.unpack('uint:4,uint:4')
+    return dict(status1=status1,status2=status2)
+
+
 
 def countCheckSum(byte1,byte2,byte3):
     """
