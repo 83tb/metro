@@ -39,7 +39,7 @@ def sendBytes(byteStr, serObj):
     """
 
     # we will send ONLY VALID string, with checksum which is ok
-    #validate(byteStr)
+    validate(byteStr)
 
     serObj.write(byteStr)
     response1 = ByteToHex(readbytes(4,serObj))
@@ -54,18 +54,15 @@ def sendBytes(byteStr, serObj):
 
     data = {
 
-            """
-            4bit + 4bit
-            """
 
-            'command': baseDict['status1'],
-            'address': baseDict['status2'],
+            'status1': baseDict['status1'],
+            'status2': baseDict['status2'],
 
 
     }
 
     #checksum check
-    check = countCheckSum(message[0],message[1],message[2])
+    #check = countCheckSum(message[0],message[1],message[2])
     # return only valid data
     #assert str(check) == "0x"+str(data['checksum'])
 
