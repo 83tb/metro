@@ -15,6 +15,8 @@ hexstr = '10 09 09 22'
 
 hexstr2 = constructRequest('GetEE',1023,1)
 
-print "Constructed: " + hexstr2
+print "Constr"
+print hexstr2
+print "#"
 
 print sendHex(hexstr, serObj)
