@@ -27,6 +27,6 @@ print sendHex(hexstr, serObj)
 
 from bitstring import Bits
 testBits = Bits(bytes=HexToByte(hexstr))
-first,second,third,fourth = testBits.unpack('uint:5, uint:1, uint:10, uint:8, uint:8')
+first,second,third,fourth,fifth = testBits.unpack('uint:5, uint:1, uint:10, uint:8, uint:8')
 
-print first,second,third,fourth
+print first,second,third,fourth,fifth
