@@ -12,14 +12,14 @@ serObj = serial.Serial('/dev/ttyUSB1',
                        )
 
 
-#hexstr = '10 09 09 22'
+hexstr = '10 09 09 22'
 
-hexstr2 = constructRequest('GetEE',1023,1)
+#hexstr2 = constructRequest('GetEE',1023,1)
 
 print "Constr"
-print ByteToHex(hexstr2)
+#print ByteToHex(hexstr2)
 print "#"
 
-#print sendHex(hexstr, serObj)
+print sendHex(hexstr, serObj)
 
-print sendBytes(hexstr2,serObj)
+#print sendBytes(hexstr2,serObj)
