@@ -1,5 +1,5 @@
 import serial
-from metro import sendHex
+from metro import sendHex, constructRequest
 serObj = serial.Serial('/dev/ttyUSB1',
                        baudrate=4800,
                        bytesize=serial.EIGHTBITS,
@@ -12,5 +12,9 @@ serObj = serial.Serial('/dev/ttyUSB1',
 
 
 hexstr = '10 09 09 22'
+
+hexstr2 = constructRequest('GetEE',1023,1)
+
+print "Constructed: " + hexstr2
 
 print sendHex(hexstr, serObj)
