@@ -53,8 +53,12 @@ def sendBytes(byteStr, serObj):
     baseDict = getCommandAndAddress(message[0],message[1])
 
     data = {
-            'command': baseDict['command'],
-            'address': baseDict['address'],
+            #'command': baseDict['command'],
+            #'address': baseDict['address'],
+
+            'command': ByteToHex(message[0]),
+            'address': ByteToHex(message[1]),
+
             'parameter': ByteToHex(message[2]),
             'checksum': ByteToHex(message[3]),
     }
