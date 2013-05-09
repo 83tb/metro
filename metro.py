@@ -68,7 +68,7 @@ def sendBytes(byteStr, serObj):
     #checksum check
     check = countCheckSum(message[0],message[1],message[2])
     # return only valid data
-    assert str(check) == "0x"+str(data['checksum'])
+    validate(data['checksum'])
 
     return data
 
