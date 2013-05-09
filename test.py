@@ -1,6 +1,8 @@
 import serial
 from metro import sendHex, constructRequest, sendBytes,HexToByte
 from hexbyte import ByteToHex
+from libmadli import getCommandNumber
+
 serObj = serial.Serial('/dev/ttyUSB1',
                        baudrate=4800,
                        bytesize=serial.EIGHTBITS,
@@ -29,7 +31,7 @@ def makeCommand(command,setgroup,address,parameter):
 
     return ByteToHex(bits.bytes)
 
-hexstr = makeCommand(2,0,9,9)
+hexstr = makeCommand(getCommandNumber('GetRam'),0,9,9)
 
 print hexstr
 print sendHex(hexstr, serObj)
