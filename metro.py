@@ -83,10 +83,7 @@ def sendBytes(byteStr, serObj):
 
     }
 
-    print 'Write takes %f' %(t1-t0)
-    print 'First takes %f' %(t2-t1)
-    print 'Second takes %f' %(t3-t2)
-    print 'Third takes %f' %(t4-t3)
+
 
 
 
