@@ -12,6 +12,9 @@ serObj = serial.Serial('/dev/ttyUSB1',
 from hexbyte import *
 
 def readbytes(number,serObj):
+    """
+    Read bytes from serial port
+    """
     buf = ''
     for i in range(number):
         byte = serObj.read()
@@ -62,9 +65,9 @@ def sendBytes(byteStr, serObj):
     }
 
     #checksum check
-    #check = countCheckSum(message[0],message[1],message[2])
+    check = countCheckSum(message[0],message[1],message[2])
     # return only valid data
-    #assert str(check) == "0x"+str(data['checksum'])
+    assert str(check) == "0x"+str(data['checksum'])
 
     return data
 
@@ -86,6 +89,12 @@ def getStatusByte(byte1):
 from bitstring import pack
 
 def makeCommand(command,setgroup,address,parameter):
+    """
+    Construct command to be send
+    Takes integers
+    Returns HEX in a format: 10 09 09 22
+    """
+
     bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
                 command,setgroup,address,parameter,34)
 
@@ -104,7 +113,7 @@ def makeCommand(command,setgroup,address,parameter):
 
 def countCheckSum(byte1,byte2,byte3):
     """
-    Counts checksum from 3 bytes, returns 4th byte
+    Counts checksum from 3 bytes, returns the checksum byte
     """
     listOfBytes = [byte1,byte2,byte3]
 
