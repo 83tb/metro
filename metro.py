@@ -29,13 +29,24 @@ def sendHex(hexstr,serObj):
     """
     return sendBytes(HexToByte(hexstr),serObj)
 
-def validate(byteStr):
+def validateOutgoing(byteStr):
     bits32 = Bits(bytes=byteStr)
     first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
-    check = countCheckSum(first,second,third)
+    check = countCheckSumOutgoing(first,second,third)
     print check
     print ByteToHex(fourth)
     assert str(check) == "0x"+str(ByteToHex(fourth))
+
+
+
+def validateIncoming(byteStr):
+    bits32 = Bits(bytes=byteStr)
+    first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
+    check = countCheckSumIncoming(first,second,third)
+    print check
+    print ByteToHex(fourth)
+    assert str(check) == "0x"+str(ByteToHex(fourth))
+
 
 def sendBytes(byteStr, serObj):
     """
@@ -44,7 +55,7 @@ def sendBytes(byteStr, serObj):
     """
 
     # we will send ONLY VALID string, with checksum which is ok
-    validate(byteStr)
+    validateOutgoing(byteStr)
 
     serObj.write(byteStr)
     response1 = ByteToHex(readbytes(4,serObj))
@@ -70,7 +81,7 @@ def sendBytes(byteStr, serObj):
     #checksum check
     check = countCheckSum(message[0],message[1],message[2])
     # return only valid data
-    validate(message)
+    validateIncoming(message)
 
     return data
 
@@ -114,7 +125,7 @@ def makeCommand(command,setgroup,address,parameter):
 
 
 
-def countCheckSum(byte1,byte2,byte3):
+def countCheckSumOutgoing(byte1,byte2,byte3):
     """
     Counts checksum from 3 bytes, returns the checksum byte
     """
@@ -124,6 +135,20 @@ def countCheckSum(byte1,byte2,byte3):
     if checksum>128: checksum = checksum - 128
 
     return hex(checksum)
+
+
+def countCheckSumIncoming(byte1,byte2,byte3):
+    """
+    Counts checksum from 3 bytes, returns the checksum byte
+    """
+    listOfBytes = [byte1,byte2,byte3]
+
+    checksum = sum(map(ord, listOfBytes))
+    if checksum<128: checksum = checksum + 128
+
+    return hex(checksum)
+
+
 
 
 
