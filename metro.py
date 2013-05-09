@@ -69,6 +69,7 @@ def sendBytes(byteStr, serObj):
     return data
 
 from bitstring import Bits
+from libmadli import getSt3st0,getSt7st4
 
 def getStatusByte(byte1):
     """
@@ -80,7 +81,7 @@ def getStatusByte(byte1):
 
     bits8 = Bits(bytes=byte1)
     status1,status2 = bits8.unpack('uint:4,uint:4')
-    return dict(status1=status1,status2=status2)
+    return dict(status1=getSt3st0(status1),status2=getSt7st4(status2))
 
 from bitstring import pack
 
