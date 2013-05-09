@@ -53,6 +53,7 @@ def sendBytes(byteStr, serObj):
 
 
     response1 = ByteToHex(readbytes(4,serObj))
+    print response1
     t2 = time()
 
 
