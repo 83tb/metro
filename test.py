@@ -38,4 +38,4 @@ def makeCommand(command,setgroup,address,parameter):
 
     return ByteToHex(bits.bytes)
 
-print makeCommand(first,second,third,fourth)
+print makeCommand(2,0,9,9)
