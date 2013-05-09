@@ -44,7 +44,7 @@ def sendBytes(byteStr, serObj):
     """
 
     # we will send ONLY VALID string, with checksum which is ok
-    validateOutgoing(byteStr)
+    #validateOutgoing(byteStr)
 
     serObj.write(byteStr)
     response1 = ByteToHex(readbytes(4,serObj))
@@ -69,7 +69,7 @@ def sendBytes(byteStr, serObj):
 
 
     # return only valid data
-    validateIncoming(message)
+    #validateIncoming(message)
 
     return data
 
