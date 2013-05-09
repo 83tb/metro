@@ -60,6 +60,7 @@ def sendBytes(byteStr, serObj):
 
             'status1': baseDict['status1'],
             'status2': baseDict['status2'],
+            'checksum': message[3]
 
 
     }
