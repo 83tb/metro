@@ -25,8 +25,17 @@ print sendHex(hexstr, serObj)
 #print sendBytes(hexstr2,serObj)
 
 
-from bitstring import Bits
+from bitstring import Bits, pack
 testBits = Bits(bytes=HexToByte(hexstr))
 first,second,third,fourth,fifth = testBits.unpack('uint:5, uint:1, uint:10, uint:8, uint:8')
 
 print first,second,third,fourth,fifth
+
+
+def makeCommand(command,setgroup,address,parameter):
+    bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
+                command,setgroup,address,parameter,34)
+
+    return ByteToHex(bits.bytes)
+
+makeCommand(first,second,third,fourth)
