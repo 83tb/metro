@@ -96,7 +96,7 @@ def makeCommand(command,setgroup,address,parameter):
     """
 
     # we pack the data so we can count checksum
-    bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
+    bits = pack('uint:5, uint:1, uint:10, uint:8',
                 command,setgroup,address,parameter)
 
     byte1,byte2,byte3  = bits.unpack('bytes:1,bytes:1,bytes:1')
