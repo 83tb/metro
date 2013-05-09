@@ -1,15 +1,7 @@
-import serial
-serObj = serial.Serial('/dev/ttyUSB1',
-                       baudrate=4800,
-                       bytesize=serial.EIGHTBITS,
-                       parity=serial.PARITY_NONE,
-                       stopbits=serial.STOPBITS_ONE,
-                       timeout=1,
-                       xonxoff=0,
-                       rtscts=0
-                       )
-
 from hexbyte import *
+from bitstring import Bits, pack
+from libmadli import getSt3st0,getSt7st4
+
 
 def readbytes(number,serObj):
     """
@@ -83,8 +75,7 @@ def sendBytes(byteStr, serObj):
 
     return data
 
-from bitstring import Bits
-from libmadli import getSt3st0,getSt7st4
+
 
 def getStatusByte(byte1):
     """
@@ -98,7 +89,6 @@ def getStatusByte(byte1):
     status1,status2 = bits8.unpack('uint:4,uint:4')
     return dict(status1=getSt3st0(status1),status2=getSt7st4(status2))
 
-from bitstring import pack
 
 def makeCommand(command,setgroup,address,parameter):
     """

@@ -1,6 +1,6 @@
 import serial
-from metro import sendHex, makeCommand, sendBytes,HexToByte
-from hexbyte import ByteToHex
+from metro import sendHex, makeCommand
+
 from libmadli import getCommandNumber
 
 serObj = serial.Serial('/dev/ttyUSB1',
