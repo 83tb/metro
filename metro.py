@@ -55,13 +55,18 @@ def sendBytes(byteStr, serObj):
         message = byte + readbytes(4,serObj)
 
     # Interpret
-    baseDict = getStatusByte(message[0])
+    #baseDict = getStatusByte(message[0])
 
     data = {
 
 
-            'status1': baseDict['status1'],
-            'status2': baseDict['status2'],
+            #'status1': baseDict['status1'],
+            #'status2': baseDict['status2'],
+            'firstByte': message[0],
+            'secondByte': message[1],
+            'thirdByte': message[2],
+
+
             'checksum': message[3]
 
 
