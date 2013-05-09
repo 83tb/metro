@@ -16,7 +16,7 @@ serObj = serial.Serial('/dev/ttyUSB1',
 
 
 for i in range(1,13):
-    hexstr = makeCommand(getCommandNumber('GetRam'),0,9,i)
+    hexstr = makeCommand(getCommandNumber('GetRam'),0,1,i)
 
     print "Sent HEX was:"
     print hexstr
