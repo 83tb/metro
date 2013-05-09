@@ -78,8 +78,7 @@ def sendBytes(byteStr, serObj):
 
     }
 
-    #checksum check
-    check = countCheckSum(message[0],message[1],message[2])
+
     # return only valid data
     validateIncoming(message)
 
