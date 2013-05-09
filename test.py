@@ -15,10 +15,10 @@ serObj = serial.Serial('/dev/ttyUSB1',
 
 
 
+for i in range(1,12):
+    hexstr = makeCommand(getCommandNumber('GetRam'),0,9,i)
 
-hexstr = makeCommand(getCommandNumber('GetEE'),0,9,9)
-
-print "Sent HEX was:"
-print hexstr
-print "What we got was:"
-print sendHex(hexstr, serObj)
+    print "Sent HEX was:"
+    print hexstr
+    print "What we got was:"
+    print sendHex(hexstr, serObj)
