@@ -33,8 +33,7 @@ def validateOutgoing(byteStr):
     bits32 = Bits(bytes=byteStr)
     first,second,third,fourth = bits32.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
     check = countCheckSumOutgoing(first,second,third)
-    print check
-    print ByteToHex(fourth)
+
     assert str(check) == "0x"+str(ByteToHex(fourth))
 
 
