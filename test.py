@@ -34,4 +34,4 @@ for i in range(1,13):
     print sendHex(hexstr, serObj)
 
     #t2 = time()
-    print 'function vers2 takes %f' %(t2-t1)
+    #print 'function vers2 takes %f' %(t2-t1)
