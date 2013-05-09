@@ -36,6 +36,7 @@ def validateIncoming(byteStr):
     check = countCheckSumIncoming(first,second,third)
     assert str(check) == "0x"+str(ByteToHex(fourth)).lower()
 
+from time import time
 
 def sendBytes(byteStr, serObj):
     """
@@ -45,14 +46,23 @@ def sendBytes(byteStr, serObj):
 
     # we will send ONLY VALID string, with checksum which is ok
     #validateOutgoing(byteStr)
+    t0 = time()
 
     serObj.write(byteStr)
+    t1 = time()
+
+
     response1 = ByteToHex(readbytes(4,serObj))
+    t2 = time()
+
 
     byte = serObj.read()
+    t3 = time()
+
 
     if byte:
         message = byte + readbytes(4,serObj)
+    t4 = time()
 
     # Interpret
     #baseDict = getStatusByte(message[0])
@@ -71,6 +81,12 @@ def sendBytes(byteStr, serObj):
 
 
     }
+
+    print 'Write takes %f' %(t1-t0)
+    print 'First takes %f' %(t2-t1)
+    print 'Second takes %f' %(t3-t2)
+    print 'Third takes %f' %(t4-t3)
+
 
 
     # return only valid data

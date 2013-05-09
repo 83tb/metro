@@ -22,16 +22,16 @@ from time import time
 
 
 for i in range(1,13):
-    t0 = time()
+    #t0 = time()
 
     hexstr = makeCommand(getCommandNumber('GetRam'),0,1,i)
-    t1 = time()
-    print 'function vers1 takes %f' %(t1-t0)
+    #t1 = time()
+    #print 'function vers1 takes %f' %(t1-t0)
 
     print "Sent HEX was:"
     print hexstr
     print "What we got was:"
     print sendHex(hexstr, serObj)
 
-    t2 = time()
+    #t2 = time()
     print 'function vers2 takes %f' %(t2-t1)
