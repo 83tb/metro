@@ -95,14 +95,20 @@ def makeCommand(command,setgroup,address,parameter):
     Returns HEX in a format: 10 09 09 22
     """
 
+    # we pack the data so we can count checksum
     bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
-                command,setgroup,address,parameter,34)
+                command,setgroup,address,parameter)
 
-    byte1,byte2,byte3,byte4  = bits.unpack('bytes:1,bytes:1,bytes:1,bytes:1')
+    byte1,byte2,byte3  = bits.unpack('bytes:1,bytes:1,bytes:1')
+
+
+    #this code should be replaced with countChecksumOutgoing function call
     listOfBytes = [byte1,byte2,byte3]
 
     checksum = sum(map(ord, listOfBytes))
     if checksum>128: checksum = checksum - 128
+    ###
+
 
     bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
                 command,setgroup,address,parameter,checksum)
