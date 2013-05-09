@@ -45,7 +45,7 @@ def validateIncoming(byteStr):
     check = countCheckSumIncoming(first,second,third)
     print check
     print ByteToHex(fourth)
-    assert str(check) == "0x"+str(ByteToHex(fourth))
+    assert str(check) == "0x"+str(ByteToHex(fourth)).lower()
 
 
 def sendBytes(byteStr, serObj):
