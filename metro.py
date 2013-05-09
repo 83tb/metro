@@ -62,9 +62,9 @@ def sendBytes(byteStr, serObj):
 
             #'status1': baseDict['status1'],
             #'status2': baseDict['status2'],
-            'firstByte': message[0],
-            'secondByte': message[1],
-            'thirdByte': message[2],
+            'firstByte': ByteToHex(message[0]),
+            'secondByte': ByteToHex(message[1]),
+            'thirdByte': ByteToHex(message[2]),
 
 
             'checksum': message[3]
