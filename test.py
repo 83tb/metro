@@ -3,7 +3,7 @@ from metro import sendHex, makeCommand
 
 from libmadli import getCommandNumber
 
-serObj = serial.Serial('/dev/ttyUSB1',
+serObj = serial.Serial('/dev/ptyp0',
                        baudrate=4800,
                        bytesize=serial.EIGHTBITS,
                        parity=serial.PARITY_NONE,
@@ -12,13 +12,6 @@ serObj = serial.Serial('/dev/ttyUSB1',
                        xonxoff=0,
                        rtscts=0
                        )
-
-
-from time import time
-
-
-
-
 
 
 for i in range(1,13):
