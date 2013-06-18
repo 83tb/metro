@@ -44,10 +44,10 @@ def sendBytes(byteStr, serObj):
     """
 
     serObj.write(byteStr)
-    byte = serObj.read()
+    #byte = serObj.read()
 
-    if byte:
-        message = byte + readbytes(4,serObj)
+    #if byte:
+    message = readbytes(4,serObj)
 
     data = {
 
