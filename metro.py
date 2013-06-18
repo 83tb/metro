@@ -49,17 +49,17 @@ def sendBytes(byteStr, serObj):
     #if byte:
     message = readbytes(4,serObj)
 
-    data = {
+    #data = {
 
-            'firstByte': ByteToHex(message[0]),
-            'secondByte': ByteToHex(message[1]),
-            'thirdByte': ByteToHex(message[2]),
-            'checksum': message[3]
+    #        'firstByte': ByteToHex(message[0]),
+    #        'secondByte': ByteToHex(message[1]),
+    #        'thirdByte': ByteToHex(message[2]),
+    #        'checksum': message[3]
 
 
-    }
+    #}
 
-    return data
+    return message
 
 
 
