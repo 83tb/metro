@@ -49,7 +49,7 @@ def sendBytes(byteStr, serObj):
     if byte:
         message = byte + readbytes(4,serObj)
 
-    data = {
+        data = {
 
             'firstByte': ByteToHex(message[0]),
             'secondByte': ByteToHex(message[1]),
@@ -57,9 +57,9 @@ def sendBytes(byteStr, serObj):
             'checksum': message[3]
 
 
-    }
+        }
 
-    return data
+        return data
 
 
 
