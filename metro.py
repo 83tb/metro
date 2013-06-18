@@ -44,22 +44,22 @@ def sendBytes(byteStr, serObj):
     """
 
     serObj.write(byteStr)
-    #byte = serObj.read()
+    byte = serObj.read()
 
-    #if byte:
-    message = readbytes(4,serObj)
+    if byte:
+        message = byte + readbytes(4,serObj)
 
-    #data = {
+    data = {
 
-    #        'firstByte': ByteToHex(message[0]),
-    #        'secondByte': ByteToHex(message[1]),
-    #        'thirdByte': ByteToHex(message[2]),
-    #        'checksum': message[3]
+            'firstByte': ByteToHex(message[0]),
+            'secondByte': ByteToHex(message[1]),
+            'thirdByte': ByteToHex(message[2]),
+            'checksum': message[3]
 
 
-    #}
+    }
 
-    return message
+    return data
 
 
 
