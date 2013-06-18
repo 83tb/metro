@@ -3,7 +3,7 @@ from metro import sendHex, makeCommand
 
 from libmadli import getCommandNumber
 
-serObj = serial.Serial('/dev/ptyp0',
+serObj = serial.Serial('/dev/USB0',
                        baudrate=4800,
                        bytesize=serial.EIGHTBITS,
                        parity=serial.PARITY_NONE,
