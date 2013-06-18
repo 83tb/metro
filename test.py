@@ -17,7 +17,9 @@ serObj = serial.Serial('/dev/ttyUSB0',
 for i in range(1,13):
     #t0 = time()
 
-    hexstr = makeCommand(getCommandNumber('GetRam'),0,1,i)
+    #hexstr = makeCommand(getCommandNumber('GetRam'),0,1,i)
+
+    hexstr = "10 08 09 21"
     #t1 = time()
     #print 'function vers1 takes %f' %(t1-t0)
 
