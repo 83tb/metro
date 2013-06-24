@@ -3,6 +3,8 @@ from bitstring import Bits, pack
 from libmadli import getSt3st0,getSt7st4
 
 
+debug = True
+
 def readbytes(number,serObj):
     """
     Read bytes from serial port
@@ -44,25 +46,9 @@ def sendBytes(byteStr, serObj):
     """
 
     serObj.write(byteStr)
-    byte = serObj.read()
-    byte = serObj.read()
+    message = readbytes(8,serObj)
 
-    byte = serObj.read()
-
-    if byte:
-        message = byte + readbytes(4,serObj)
-
-    data = {
-
-            'firstByte': ByteToHex(message[0]),
-            'secondByte': ByteToHex(message[1]),
-            'thirdByte': ByteToHex(message[2]),
-            'checksum': message[3]
-
-
-    }
-
-    return data
+    return ByteToHex(message[4:8])
 
 
 

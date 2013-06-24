@@ -15,6 +15,14 @@ def ByteToHex( byteStr ):
 
     return ''.join( [ "%02X " % ord( x ) for x in byteStr ] ).strip()
 
+def RevByteToHex( byteStr ):
+    """
+    Convert a byte string to it's hex string representation e.g. for output.
+    """
+
+    return ''.join( [ "%02X " % ord( x ) for x in reversed(byteStr) ] ).strip()
+
+
 #-------------------------------------------------------------------------------
 
 def HexToByte( hexStr ):
@@ -32,6 +40,7 @@ def HexToByte( hexStr ):
         bytes.append( chr( int (hexStr[i:i+2], 16 ) ) )
 
     return ''.join( bytes )
+
 
 #-------------------------------------------------------------------------------
 
