@@ -19,7 +19,7 @@ for i in range(1,13):
 
     #hexstr = makeCommand(getCommandNumber('GetRam'),0,1,i)
 
-    hexstr = "10 08 09 21"
+    hexstr = "10 09 09 22"
     #t1 = time()
     #print 'function vers1 takes %f' %(t1-t0)
 
