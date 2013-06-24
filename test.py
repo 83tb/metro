@@ -14,7 +14,7 @@ serObj = serial.Serial('/dev/ttyUSB0',
                        )
 
 
-for i in range(1,13):
+for i in range(1,2):
     #t0 = time()
 
     #hexstr = makeCommand(getCommandNumber('GetRam'),0,1,i)
