@@ -47,6 +47,8 @@ def sendBytes(byteStr, serObj):
     byte = serObj.read()
     byte = serObj.read()
 
+    byte = serObj.read()
+
     if byte:
         message = byte + readbytes(4,serObj)
 
