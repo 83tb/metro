@@ -1,7 +1,7 @@
 import serial
-from metro import sendHex, makeCommand
+from source.metro import sendHex, makeCommand
 
-from libmadli import getCommandNumber
+from source.libmadli import getCommandNumber
 
 serObj = serial.Serial('/dev/ttyUSB0',
                        baudrate=4800,

@@ -1,6 +1,6 @@
-from hexbyte import *
+from source.hexbyte import *
 from bitstring import Bits, pack
-from libmadli import getSt3st0,getSt7st4
+from source.libmadli import getSt3st0,getSt7st4
 
 
 debug = True
