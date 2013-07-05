@@ -49,7 +49,8 @@ def executeCommand(command_string, device_number, memory_range):
 
         hexstr = makeCommand(command_number,0,device_number,memory_address)
         value =  shx(hexstr)
-        r_server.set("Warehouse:1:Device:" + str(device_number) + ":"+command_string+":" + str(memory_address), int("0x"+value[3:5],16))
+        if value:
+            r_server.set("Warehouse:1:Device:" + str(device_number) + ":"+command_string+":" + str(memory_address), int("0x"+value[3:5],16))
 
 
     t1 = time()
