@@ -87,7 +87,7 @@ executeCommand(command_string,device_number,memory_range)
 
 
 kolejka = Queue('low', connection=r_server)
-job = q.enqueue(executeCommand, command_string,device_number,memory_range)
+job = kolejka.enqueue(executeCommand, command_string,device_number,memory_range)
 
 
 
