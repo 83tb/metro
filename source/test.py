@@ -8,9 +8,9 @@ Example of a Metro Daemon with 10 priority queues
 
 
 import serial
-from source.metro import sendHex, makeCommand
+from metro import sendHex, makeCommand
 
-from source.libmadli import getCommandNumber
+from libmadli import getCommandNumber
 
 serObj = serial.Serial('/dev/ttyUSB0',
                        baudrate=4800,
