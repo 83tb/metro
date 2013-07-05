@@ -86,8 +86,8 @@ executeCommand(command_string,device_number,memory_range)
 
 
 
-kolejka = Queue('low', connection=r_server)
-job = kolejka.enqueue(executeCommand, command_string,device_number,memory_range)
+#kolejka = Queue('low', connection=r_server)
+#job = kolejka.enqueue(executeCommand, command_string,device_number,memory_range)
 
 
 
