@@ -68,7 +68,7 @@ def executeCommand(command_string, device_number, memory_range):
 
 command_string = 'GetRam'
 device_number = 9
-memory_range = range(0,35)
+memory_range = range(0,30)
 
 executeCommand(command_string,device_number,memory_range)
 
