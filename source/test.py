@@ -43,7 +43,7 @@ def executeCommand(command_string, device_number, memory_range):
 
     print "METER 0.3.1"
     print
-    print "GET RAM"
+    print command_string
     print "-----------"
     print "[ LOGS ]"
     print
