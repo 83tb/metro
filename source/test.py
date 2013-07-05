@@ -76,13 +76,13 @@ def executeCommand(command_string, device_number, memory_range):
     if time_debug: print '[ Getting response took %f sec ]' %(t2-t1)
 
 
-
+"""
 command_string = 'GetRam'
 device_number = 1
 memory_range = range(0,30)
 
 executeCommand(command_string,device_number,memory_range)
-
+"""
 
 
 
