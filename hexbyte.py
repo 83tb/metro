@@ -6,7 +6,6 @@ ByteToHex converts byte string "\xFF\xFE\x00\x01" to the string "FF FE 00 01"
 HexToByte converts string "FF FE 00 01" to the byte string "\xFF\xFE\x00\x01"
 """
 
-#-------------------------------------------------------------------------------
 
 def ByteToHex( byteStr ):
     """
@@ -15,6 +14,7 @@ def ByteToHex( byteStr ):
 
     return ''.join( [ "%02X " % ord( x ) for x in byteStr ] ).strip()
 
+    #-------------------------------------------------------------------------------
 def RevByteToHex( byteStr ):
     """
     Convert a byte string to it's hex string representation e.g. for output.
