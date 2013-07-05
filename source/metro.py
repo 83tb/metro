@@ -1,3 +1,10 @@
+"""HexByteConversion
+
+Main source code of data mining asset
+"""
+
+
+
 from source.hexbyte import *
 from bitstring import Bits, pack
 from source.libmadli import getSt3st0,getSt7st4

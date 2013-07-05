@@ -1,3 +1,11 @@
+"""Metrolight main library
+
+
+Place to hold static info about configs
+"""
+
+
+
 commands = {
     'On' : 0,
     'Off' : 1,
