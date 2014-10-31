@@ -23,12 +23,26 @@ def readbytes(number,serObj):
 
     return buf
 
+
+
+
+
 def sendHex(hexstr,serObj):
     """
     Sends string like "FF FE 00 01"
     Returns data dictionary
     """
     return sendBytes(HexToByte(hexstr),serObj)
+
+def sendHexNoReturn(hexstr,serObj):
+    """
+    Sends string like "FF FE 00 01"
+    Returns data dictionary
+    """
+    return sendBytesNoReturn(HexToByte(hexstr),serObj)
+
+
+
 
 def validateOutgoing(byteStr):
     bits32 = Bits(bytes=byteStr)
@@ -51,11 +65,24 @@ def sendBytes(byteStr, serObj):
     Sends string like this: string "\xFF\xFE\x00\x01"
     Returns data dictionary
     """
-
     serObj.write(byteStr)
+    
     message = readbytes(8,serObj)
-
+    
     return ByteToHex(message[4:8])
+
+def sendBytesNoReturn(byteStr, serObj):
+    """
+    Sends string like this: string "\xFF\xFE\x00\x01"
+    Returns data dictionary
+    """
+    serObj.write(byteStr)
+    
+    #message = readbytes(8,serObj)
+    
+    #return ByteToHex(message[4:8])
+    return ""
+
 
 
 

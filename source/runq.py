@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from test import executeCommand
 
 command_string = 'GetRam'
