@@ -6,7 +6,7 @@ Example of a Metro Daemon with 10 priority queues
 """
 
 import serial
-from metro import sendHex, sendHexNoReturn, makeCommand
+from metro import sendHex, sendHexNoReturn, makeCommand, readCommand
 
 from libmadli import getCommandNumber
 
@@ -23,14 +23,14 @@ serObj = serial.Serial('/dev/ttyUSB1',
 
 def shxNR(arg):
     hexstr = arg
-    print "Sending: " + hexstr
+    #print "Sending: " + hexstr
     return sendHexNoReturn(hexstr, serObj) 
  
 
 def shx(arg):
     
     hexstr = arg
-    print "Sending: " + hexstr
+    #print "Sending: " + hexstr
     return sendHex(hexstr, serObj) 
 
 
@@ -40,19 +40,19 @@ from rq import Connection, Queue
 
 r_server = redis.StrictRedis(host='localhost', port=6379, db=0)
     
-from time import time
+from time import time, sleep
 
 
 def executeCommand(command_string, device_number, memory_range):
 
-    time_debug = True
+    time_debug = False
 
     #print "METER 0.3.1"
-    print
+    #print
     print command_string
-    print "-----------"
-    print "[ LOGS ]"
-    print
+    #print "-----------"
+    #print "[ LOGS ]"
+    #print
     t0 = time()
 
 
@@ -61,13 +61,15 @@ def executeCommand(command_string, device_number, memory_range):
 
 
     for memory_address in memory_range:
-        print memory_address
+        #print memory_address
         hexstr = makeCommand(command_number,0,device_number,memory_address)
         
         if command_string == "WriteAddr" or command_string == "SetAddr":
             value = shxNR(hexstr)
         else: 
             value =  shx(hexstr)
+            #print readCommand(value)
+            return readCommand(value)
         print "Getting: " + value
     
         #print value
@@ -81,30 +83,32 @@ def executeCommand(command_string, device_number, memory_range):
     t2 = time()
     if time_debug: print '[ Getting response took %f sec ]' %(t2-t1)
 
-
-#"""
-#command_string = 'On'
-#device_number = 195
-#Bmemory_range = range(0,1)
-
-#executeCommand(command_string,device_number,memory_range)
-
-executeCommand('On',464,range(0,1))
-executeCommand('On',464,range(0,1))
-executeCommand('SetAddr',464,range(0,1))
+def turnOn(lamp_number):
+    executeCommand('On',lamp_number,range(0,1))
+    executeCommand('On',lamp_number,range(0,1))
 
 
-executeCommand('WriteAddr',464,range(91,92))
-executeCommand('GetRam',464,range(0,1))
+def turnOff(lamp_number):
+    executeCommand('Off',lamp_number,range(0,1))
+    executeCommand('Off',lamp_number,range(0,1))
 
 
-#"""
+
+def setDim(lamp_number, dim_ad, dim_level):
+    executeCommand('SetAddr',lamp_number,range(dim_ad,dim_ad+1))
+    executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
+    #executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
+    
+def getRamValue(lamp_number, address):
+    print executeCommand('GetRam',lamp_number,range(address,address+1))
 
 
-#kolejka = Queue('low', connection=r_server)
-#job = kolejka.enqueue(executeCommand, command_string,device_number,memory_range)
 
-# this is going to be a part of command reader (text format)
-    # when more commands
-    #for i in iter(hexstr.splitlines()):
-    #    print "[ " + shx(i) + " ]"
+turnOff(191)
+#while True:
+setDim(191, 0, 81)
+#    setDim(191, 0, 1)
+#    setDim(191, 24, 1)
+
+#executeCommand('GetRam',464,range(0,1))
+getRamValue(191,0)

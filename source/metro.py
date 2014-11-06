@@ -99,6 +99,19 @@ def getStatusByte(byte1):
     return dict(status1=getSt3st0(status1),status2=getSt7st4(status2))
 
 
+def readCommand(hexbits):
+    bits = Bits(bytes=HexToByte(hexbits))
+    print bits
+    command,setgroup,address,parameter,checksum = bits.unpack('uint:5, uint:1, uint:10, uint:8, uint:8')
+    
+    dic = { 'command' : command,
+            'setgroup' : setgroup,
+            'address' : address,
+            'parameter' : parameter,
+            'checksum' : checksum }
+    return dic        
+
+
 def makeCommand(command,setgroup,address,parameter):
     """
     Construct command to be send
@@ -118,11 +131,20 @@ def makeCommand(command,setgroup,address,parameter):
 
     checksum = sum(map(ord, listOfBytes))
     if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    if checksum>128: checksum = checksum - 128
+    
     ###
-
-
+    
     bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
                 command,setgroup,address,parameter,checksum)
+
 
     return ByteToHex(bits.bytes)
 
