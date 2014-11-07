@@ -101,13 +101,13 @@ def getStatusByte(byte1):
 
 def readCommand(hexbits):
     bits = Bits(bytes=HexToByte(hexbits))
-    print bits
-    command,setgroup,address,parameter,checksum = bits.unpack('uint:5, uint:1, uint:10, uint:8, uint:8')
+    #print bits
+    alarm,state,data1,data2,checksum = bits.unpack('uint:4, uint:4, uint:8, uint:8, uint:8')
     
-    dic = { 'command' : command,
-            'setgroup' : setgroup,
-            'address' : address,
-            'parameter' : parameter,
+    dic = { 'state' : state,
+            'alarm' : alarm,
+            'data1' : data1,
+            'data2' : data2,
             'checksum' : checksum }
     return dic        
 
@@ -118,7 +118,14 @@ def makeCommand(command,setgroup,address,parameter):
     Takes integers
     Returns HEX in a format: 10 09 09 22
     """
-
+    
+    #print **kwargs
+    #print *args
+    
+    #print command
+    #print address
+    #print parameter
+    
     # we pack the data so we can count checksum
     bits = pack('uint:5, uint:1, uint:10, uint:8',
                 command,setgroup,address,parameter)

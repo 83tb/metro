@@ -49,7 +49,7 @@ def executeCommand(command_string, device_number, memory_range):
 
     #print "METER 0.3.1"
     #print
-    print command_string
+    #print command_string
     #print "-----------"
     #print "[ LOGS ]"
     #print
@@ -64,13 +64,13 @@ def executeCommand(command_string, device_number, memory_range):
         #print memory_address
         hexstr = makeCommand(command_number,0,device_number,memory_address)
         
-        if command_string == "WriteAddr" or command_string == "SetAddr":
+        if command_string == "SetAddr":
             value = shxNR(hexstr)
         else: 
             value =  shx(hexstr)
             #print readCommand(value)
             return readCommand(value)
-        print "Getting: " + value
+        #print "Getting: " + value
     
         #print value
         #if value:
@@ -85,30 +85,39 @@ def executeCommand(command_string, device_number, memory_range):
 
 def turnOn(lamp_number):
     executeCommand('On',lamp_number,range(0,1))
-    executeCommand('On',lamp_number,range(0,1))
+    print executeCommand('On',lamp_number,range(0,1))
 
 
 def turnOff(lamp_number):
     executeCommand('Off',lamp_number,range(0,1))
     executeCommand('Off',lamp_number,range(0,1))
 
-
-
 def setDim(lamp_number, dim_ad, dim_level):
     executeCommand('SetAddr',lamp_number,range(dim_ad,dim_ad+1))
     executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
-    #executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
+    executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
     
 def getRamValue(lamp_number, address):
     print executeCommand('GetRam',lamp_number,range(address,address+1))
 
 
+lamp_num = 195
 
-turnOff(191)
-#while True:
-setDim(191, 0, 81)
-#    setDim(191, 0, 1)
-#    setDim(191, 24, 1)
+turnOff(lamp_num)
 
-#executeCommand('GetRam',464,range(0,1))
-getRamValue(191,0)
+setDim(lamp_num, 0, 83)
+
+getRamValue(lamp_num,0)
+
+
+setDim(lamp_num, 0, 83)
+getRamValue(lamp_num,0)
+
+
+getRamValue(lamp_num,24)
+
+#sleep(10)
+
+#setDim(lamp_num, 0, 82)
+#getRamValue(lamp_num,0)
+
