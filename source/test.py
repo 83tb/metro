@@ -64,7 +64,7 @@ def executeCommand(command_string, device_number, memory_range):
         #print memory_address
         hexstr = makeCommand(command_number,0,device_number,memory_address)
         
-        if command_string == "SetAddr":
+        if command_string == "SetAddr" or command_string == "WriteAddr":
             value = shxNR(hexstr)
         else: 
             value =  shx(hexstr)
@@ -91,7 +91,8 @@ def turnOn(lamp_number):
 def turnOff(lamp_number):
     executeCommand('Off',lamp_number,range(0,1))
     executeCommand('Off',lamp_number,range(0,1))
-
+    #sleep(1)
+    
 def setDim(lamp_number, dim_ad, dim_level):
     executeCommand('SetAddr',lamp_number,range(dim_ad,dim_ad+1))
     executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
@@ -101,20 +102,26 @@ def getRamValue(lamp_number, address):
     print executeCommand('GetRam',lamp_number,range(address,address+1))
 
 
-lamp_num = 195
+lamp_num = 464
 
-turnOff(lamp_num)
-
-setDim(lamp_num, 0, 83)
-
-getRamValue(lamp_num,0)
-
-
+turnOn(lamp_num)
 setDim(lamp_num, 0, 83)
 getRamValue(lamp_num,0)
 
 
-getRamValue(lamp_num,24)
+sleep(1)
+
+turnOn(lamp_num)
+setDim(lamp_num, 0, 44)
+getRamValue(lamp_num,0)
+
+sleep(1)
+
+turnOn(lamp_num)
+setDim(lamp_num, 0, 254)
+getRamValue(lamp_num,0)
+
+
 
 #sleep(10)
 
