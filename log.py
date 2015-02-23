@@ -113,4 +113,4 @@ import datetime
 while True:
     for lamp_num in lamp_nums:
         print "Numer lampy: " + lamp_num + " Status: " + getRamValue(lamp_num,0) + " " + datetime.datetime()
-    sleep 10
+    sleep(10)
