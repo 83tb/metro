@@ -63,8 +63,6 @@ def executeCommand(command_string, device_number, memory_range):
     for memory_address in memory_range:
         #print memory_address
         hexstr = makeCommand(command_number,0,device_number,memory_address)
-        
-        print "what we're sending"
         print hexstr
         
         if command_string == "SetAddr" or command_string == "WriteAddr":
@@ -86,9 +84,9 @@ def executeCommand(command_string, device_number, memory_range):
     t2 = time()
     if time_debug: print '[ Getting response took %f sec ]' %(t2-t1)
 
-def turnOn(lamp_number, dim_level):
-    executeCommand('On',lamp_number, range(dim_level,dim_level+1))
-    print executeCommand('On',lamp_number, range(dim_level,dim_level+1))
+def turnOn(lamp_number):
+    executeCommand('On',lamp_number,range(0,1))
+    print executeCommand('On',lamp_number,range(0,1))
 
 
 def turnOff(lamp_number):
@@ -97,9 +95,8 @@ def turnOff(lamp_number):
     #sleep(1)
     
 def setDim(lamp_number, dim_ad, dim_level):
-    executeCommand('Lock',lamp_number,range(dim_ad,dim_ad+1))
-    executeCommand('SetEEAddr',lamp_number,range(dim_ad,dim_ad+1))
-    executeCommand('SetEEData',lamp_number,range(dim_level,dim_level+1))
+    executeCommand('SetAddr',lamp_number,range(dim_ad,dim_ad+1))
+    executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
     #executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
     
 def getRamValue(lamp_number, address):
@@ -108,29 +105,37 @@ def getRamValue(lamp_number, address):
 
 lamp_num = 9
 
-
-"""
-Turn on
-"""
-
-
-turnOn(9, 10)
-#turnOn(461, 10)
-
-
+#turnOn(9)
+#setDim(lamp_num, 0, 255)
 #setDim(lamp_num, 0, 244)
 #setDim(lamp_num, 0, 244)
 
 """
-Reads Ram Value from a Lamp
+sleep(1)
+
+turnOn(lamp_num)
+setDim(lamp_num, 0, 44)
 """
+
 #getRamValue(lamp_num,0)
 
-
-"""
-send raw command, just 4 hexes
-this one is basically the same as getRamValue(lamp_num,0)
-"""
+# send raw command, just 4 hexes
+# this one is basically the same as getRamValue(lamp_num,0)
 #print readCommand(shx("10 09 00 19"))
 
+
+
+"""
+sleep(1)
+
+turnOff(lamp_num)
+setDim(lamp_num, 0, 254)
+getRamValue(lamp_num,0)
+
+
+"""
+#sleep(10)
+
+#setDim(lamp_num, 0, 82)
+#getRamValue(lamp_num,0)
 

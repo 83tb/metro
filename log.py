@@ -100,20 +100,35 @@ def setDim(lamp_number, dim_ad, dim_level):
 
 def getRamValue(lamp_number, address):
     print executeCommand('GetRam',lamp_number,range(address,address+1))
+    
 
-
-lamp_nums = [126,345,846,19]
-
+lamp_nums = [845,126,846,19]
 
 for lamp_num in lamp_nums:
     turnOn(lamp_num)
-    setDim(lamp_num, 0, 83)
+    #setDim(lamp_num, 0, 83)
 
-lamp_nums = [126,345,846,19]
+
+import sys
+counter = 121
 
 import datetime
 while True:
+    if counter > 120:
+        for lamp_num in lamp_nums:
+            turnOff(lamp_num)
+                   
+    if counter > 240:
+        for lamp_num in lamp_nums:
+            turnOn(lamp_num)
+            counter = 0
+    
+    counter = counter + 1
+        
     for lamp_num in lamp_nums:
-        print lamp_num
-        print "Numer lampy: " + str(lamp_num) + " Status: " + getRamValue(lamp_num,0) + " " + datetime.datetime()
-    sleep(10)
+        try:
+            sys.stdout.write("Numer lampy: " + str(lamp_num) + " Status: ")# + datetime.datetime()
+            getRamValue(lamp_num, 0)
+        except:
+            print "Error reading: " + lamp_num
+    sleep(60)

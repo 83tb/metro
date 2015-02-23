@@ -128,24 +128,30 @@ def makeCommand(command,setgroup,address,parameter):
     bits = pack('uint:5, uint:1, uint:10, uint:8',
                 command,setgroup,address,parameter)
 
+    #print command
+
     byte1,byte2,byte3  = bits.unpack('bytes:1,bytes:1,bytes:1')
 
 
     #this code should be replaced with countChecksumOutgoing function call
     listOfBytes = [byte1,byte2,byte3]
 
-    checksum = sum(map(ord, listOfBytes))
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
-    if checksum>128: checksum = checksum - 128
+
+
+    checksum_ = map(ord, listOfBytes)
+    checksum = sum(checksum_)
+        
+    #print "checksum!: " + str(checksum_)
+    if checksum>511: 
+        checksum = checksum - 512
+    if checksum>255: 
+        checksum = checksum - 256
+    if checksum>127: 
+        checksum = checksum - 128
     
-    ###
+    #print "checksum!: " + str(checksum)
+    
+    
     
     bits = pack('uint:5, uint:1, uint:10, uint:8, uint:8',
                 command,setgroup,address,parameter,checksum)
