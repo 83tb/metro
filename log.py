@@ -109,7 +109,7 @@ for lamp_num in lamp_nums:
     turnOn(lamp_num)
     setDim(lamp_num, 0, 83)
 
-
+lamp_nums = [126,345,846,19]
 
 import datetime
 while True:
