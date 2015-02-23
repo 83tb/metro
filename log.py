@@ -109,8 +109,10 @@ for lamp_num in lamp_nums:
     turnOn(lamp_num)
     setDim(lamp_num, 0, 83)
 
+
+
 import datetime
 while True:
     for lamp_num in lamp_nums:
-        print "Numer lampy: " + lamp_num + " Status: " + getRamValue(lamp_num,0) + " " + datetime.datetime()
+        print "Numer lampy: " + str(lamp_num) + " Status: " + getRamValue(lamp_num,0) + " " + datetime.datetime()
     sleep(10)
