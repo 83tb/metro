@@ -83,9 +83,13 @@ def executeCommand(command_string, device_number, memory_range):
     t2 = time()
     if time_debug: print '[ Getting response took %f sec ]' %(t2-t1)
 
+import logging
+logging.basicConfig(filename='lampy.log', level=logging.INFO)
+
+
 def turnOn(lamp_number):
     executeCommand('On',lamp_number,range(0,1))
-    print executeCommand('On',lamp_number,range(0,1))
+    logging.info(executeCommand('On',lamp_number,range(0,1)))
 
 
 def turnOff(lamp_number):
@@ -93,42 +97,49 @@ def turnOff(lamp_number):
     executeCommand('Off',lamp_number,range(0,1))
     #sleep(1)
 
-def setDim(lamp_number, dim_ad, dim_level):
-    executeCommand('SetAddr',lamp_number,range(dim_ad,dim_ad+1))
-    executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
-    executeCommand('WriteAddr',lamp_number,range(dim_level,dim_level+1))
+def setDim(lamp_number, dim_level):
+    executeCommand('On',lamp_number,range(dim_level,dim_level+1))
+    executeCommand('On',lamp_number,range(dim_level,dim_level+1))
+
+
+import logging
+logging.basicConfig(filename='lampy.log', level=logging.INFO)
 
 def getRamValue(lamp_number, address):
-    print executeCommand('GetRam',lamp_number,range(address,address+1))
-    
+    prefix = "Numer lampy: " + str(lamp_num) + " Status: "# + datetime.datetime()           
+    output = executeCommand('GetRam',lamp_number,range(address,address+1))
+    logging.info(prefix + str(output))
+
 
 lamp_nums = [845,126,846,19]
 
 for lamp_num in lamp_nums:
     turnOn(lamp_num)
-    #setDim(lamp_num, 0, 83)
+    setDim(lamp_num, 255)
 
 
 import sys
-counter = 121
+counter = 102
 
 import datetime
 while True:
-    if counter > 120:
+    if counter == 120:
         for lamp_num in lamp_nums:
             turnOff(lamp_num)
                    
-    if counter > 240:
+    if counter == 240:
         for lamp_num in lamp_nums:
             turnOn(lamp_num)
             counter = 0
     
     counter = counter + 1
+    
+    info =  "## Minute " + str(counter)
+    logging.info(info)
         
     for lamp_num in lamp_nums:
         try:
-            sys.stdout.write("Numer lampy: " + str(lamp_num) + " Status: ")# + datetime.datetime()
             getRamValue(lamp_num, 0)
         except:
-            print "Error reading: " + lamp_num
+            logging.error("Error reading: " + str(lamp_num))
     sleep(60)
